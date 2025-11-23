@@ -1,0 +1,48 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  Admin
+  Ong
+}
+
+model User {
+  id             String   @id @default(auto()) @map("_id") @db.ObjectId
+  name           String   @unique
+  email          String   @unique
+  hashedPassword String
+  role           Role
+  created_at     DateTime @default(now())
+
+  ong ONG?
+}
+
+type Image {
+  id  String
+  url String
+}
+
+model ONG {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId      String   @unique @db.ObjectId
+  name        String   @unique
+  email       String   @unique
+  description String
+  category    String
+  address     String
+  image       Image
+  voluntary   String
+  itens       String
+  phone       String
+  site        String?
+  instagram   String?
+  created_at  DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
