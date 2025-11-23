@@ -150,7 +150,7 @@ export const editOng = async (formData: unknown, ongId: string) => {
 export const deleteOng = async (ongId: string, imageId: string) => {
   try {
     // Verificar se a ong realmente existe na base de dados
-    const ongExist = await prisma.oNG.findFirst({ where: { id: ongId } });
+    const ongExist = await prisma.oNG.findUnique({ where: { id: ongId } });
 
     if (!ongExist) throw new Error("Nenhuma ONG encontrada");
 

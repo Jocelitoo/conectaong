@@ -82,8 +82,7 @@ export const EditOngForm = ({ ong }: EditOngFormProps) => {
   const onSubmit = (values: z.infer<typeof createOngFormSchema>) => {
     setIsLoading(true);
 
-    const ongId = data?.user.ong?.id || "";
-    const userId = data?.user.id || "";
+    const ongId = ong?.id || "";
 
     editOng(values, ongId)
       .then((response) => {
