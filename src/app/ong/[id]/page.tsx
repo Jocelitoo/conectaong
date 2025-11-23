@@ -9,7 +9,7 @@ interface ProductParamsProps {
 const Ong = async ({ params }: ProductParamsProps) => {
   const { id } = await params; // Pegar o id enviado como parâmetro
 
-  const ong = await prisma.oNG.findFirst({ where: { id: id } });
+  const ong = await prisma.oNG.findUnique({ where: { id: id } });
 
   return (
     <main className="grow py-3 px-2 sm:px-8 lg:px-20 sm:flex  sm:gap-3 ">
